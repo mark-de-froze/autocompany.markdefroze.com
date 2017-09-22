@@ -1,0 +1,12 @@
+<h1><%= @title %></h1>
+<%= simple_form_for(@admin_role) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+
+  <%= f.input :name %>
+  <%= f.input :resource_id, collection: @admin_role.resource_type.classify.constantize.all  if @admin_role.resource_type.present? %>
+  <%= f.input :resource_type, collection: Rolify.resource_types.uniq %>
+<% end %>

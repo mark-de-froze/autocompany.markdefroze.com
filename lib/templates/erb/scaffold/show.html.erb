@@ -1,0 +1,16 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: 'btn btn-primary' %>
+        <%%= link_to 'Back', <%= index_helper %>_path, class: 'btn btn-light' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% attributes.reject(&:password_digest?).each do |attribute| -%>
+<p>
+  <strong><%= attribute.human_name %>:</strong>
+  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+</p>
+<% end -%>

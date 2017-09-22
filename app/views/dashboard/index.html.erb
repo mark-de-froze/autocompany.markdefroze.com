@@ -1,0 +1,17 @@
+<% if current_user.has_role? :dashboard  %>
+
+<h1><%=@title%></h1>
+
+<%= render 'dashboard/widgets/counters.html' %>
+
+<div class="row">
+  <div class="col">
+    <%= render 'dashboard/widgets/empty_storage' %>
+  </div>
+  <div class="col">
+    <%= render 'dashboard/widgets/barrels_with_oil' %>
+  </div>
+</div>
+
+<%= render 'dashboard/widgets/orders_opened.html' %>
+<% end %>

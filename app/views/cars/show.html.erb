@@ -1,0 +1,61 @@
+<% if current_user.has_role? :manager %>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'Edit', edit_car_path(@car), class: 'btn btn-primary' %>
+        <%= link_to 'Back', cars_path, class: 'btn btn-light' %>
+        <%= link_to 'Destroy', @car, method: :delete, data: { confirm: t('confirm') }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<div class="container">
+  <h1 class="display-4"><%= @car.to_label %></h1>
+  <div class="row">
+    <div class="col-3">
+      <p>
+        <strong>Brand:</strong>
+        <%= @car.brand %>
+      </p>
+      <p>
+        <strong>Model:</strong>
+        <%= @car.model %>
+      </p>
+      <p>
+        <strong>State number:</strong>
+        <%= @car.state_number %>
+      </p>
+      <p>
+        <strong>Title:</strong>
+        <%= @car.title %>
+      </p>
+    </div>
+    <div class="col-3">
+      <p>
+        <strong>VIN:</strong>
+        <%= @car.vin %>
+      </p>
+      <p>
+        <strong>Year:</strong>
+        <%= @car.year %>
+      </p>
+      <p>
+        <strong>Mileage:</strong>
+        <%= @car.mileage %> km
+      </p>
+      <p>
+        <strong>Engine:</strong>
+        <%= @car.engine_number %>
+        <%= @car.engine_type %>
+        <%= @car.engine_capacity %>
+      </p>
+    </div>
+    <div class="col">
+      <%= render 'clients/client', client: @client %>
+    </div>
+  </div>
+  <p class="lead"><%= @car.content %></p>
+</div>
+<%= render 'orders/orders' %>

@@ -1,0 +1,10 @@
+<% @years.each do |year| %>
+    <h2><%=year%></h2>
+    <div class="row">
+      <% (1..12).each do |month| %>
+        <div class="col-2 mb-3">
+          <%= link_to(date(Date.new(year,month),'%B, %Y'), reports_orders_url(:date => "#{year}/#{month}", :client => @client), class: 'btn btn-primary') %>
+        </div>
+      <% end %>
+    </div>
+<% end %>

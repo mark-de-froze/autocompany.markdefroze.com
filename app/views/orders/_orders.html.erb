@@ -1,0 +1,59 @@
+<% if current_user.has_role? :manager %>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'New Order', new_order_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Order</th>
+      <th>Car</th>
+      <th>Created at</th>
+      <th>Finished at</th>
+      <th colspan="5" width="35%"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.to_label %></td>
+        <td>
+          <% unless @client %>
+            <%= order.client.to_label %>
+          <% end %>
+          <%= order.car.to_label if order.car %>
+          <% if order.car %>
+            <%= order.mileage %> km
+          <% end %>
+        </td>
+        <td><%= date(order.created_at) %></td>
+        <td><%= date(order.finished_at) %></td>
+        <% if current_user.has_role? :manager  %>
+          <td><%= link_to 'Show', order %></td>
+        <% end %>
+        <% if order.status == 'closed' %>
+        <td><%= link_to 'Report', reports_order_url(order) %></td>
+        <% end %>
+        <% if current_user.has_role? :manager  %>
+          <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <% end %>
+        <% if current_user.has_role? :manager  %>
+          <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: t('confirm') } if order.status == 'opened' %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @orders, param_name: :orders_page %>
+
+<% if @orders.empty? %>
+<h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>

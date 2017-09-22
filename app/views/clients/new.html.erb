@@ -1,0 +1,5 @@
+<% content_for :links do %>
+  <%= link_to 'Back', clients_path, class: 'btn btn-light' %>
+<% end %>
+
+<%= render 'form', client: @client %>

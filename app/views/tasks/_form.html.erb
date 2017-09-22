@@ -1,0 +1,38 @@
+<h1><%= @title %></h1>
+<%= simple_form_for([@task.order, @task]) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+
+  <% if @task.job %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :price, input_html: {value: @task.autoload_price} %>
+    </div>
+    <div class="col">
+      <%= f.input :finished_at, as: :datetime, default: Date.today() + 10 %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= f.association :service, prompt: :translate  %>
+
+  <% if @task.service %>
+    <% if @task.service.jobs.size %>
+    <div>
+      <%= f.association :job, collection: @task.service.jobs, prompt: :translate  %>
+    </div>
+    <% end %>
+  <% end %>
+
+  <% if @task.job %>
+    <% if @task.service.workers.count > 0 %>
+    <hr>
+    <div>
+      <%= f.association :worker, collection: @task.service.workers, prompt: :translate  %>
+    </div>
+    <% end %>
+  <% end %>
+<% end %>

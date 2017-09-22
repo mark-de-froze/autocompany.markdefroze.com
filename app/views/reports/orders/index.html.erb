@@ -1,0 +1,7 @@
+<h1><%=@title%></h1>
+
+<% if @start_date || (@client && params[:all]) %>
+    <%= render 'orders' %>
+<% else %>
+    <%= render 'list_months' %>
+<% end %>

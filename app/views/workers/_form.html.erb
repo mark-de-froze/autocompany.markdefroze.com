@@ -1,0 +1,22 @@
+<h1><%= @title %></h1>
+<%= simple_form_for(@worker,
+                    wrapper_mappings: {
+                        check_boxes: :vertical_radio_and_checkboxes,
+                    }) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.association :user, prompt: :translate %>
+
+  <%= f.label :services %>
+  <div class="row">
+    <%= f.collection_check_boxes :service_ids, @services, :id, :title, :item_wrapper_class => 'col-4' %>
+  </div>
+<% end %>
+
+

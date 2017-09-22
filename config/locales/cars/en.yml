@@ -1,0 +1,23 @@
+en:
+  simple_form:
+    hints:
+      car:
+        state_number: "Only numbers and latin characters allowed"
+        year: "Only numbers allowed"
+        vin: "Only numbers and latin characters allowed and length 17 symbols"
+    placeholders:
+      car:
+        title: "Enter a note about this car (optional)"
+        content: "Enter a note about this car (optional)"
+        brand: "Enter brand car"
+        model: "Enter model car"
+        vin: "VIN code"
+        year: "Enter year of issue"
+        mileage: "Enter mileage car"
+    options:
+      car:
+        engine_type:
+          reciprocating: "Reciprocating"
+          carburetor: "Carburetor"
+          fuel_injection: "Fuel Injection"
+          hybrid: "Hybrid"

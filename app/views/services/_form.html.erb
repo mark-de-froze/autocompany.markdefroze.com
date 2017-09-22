@@ -1,0 +1,11 @@
+<h1><%= @title %></h1>
+<%= simple_form_for(@service) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+
+  <%= f.input :title %>
+  <%= f.input :content %>
+<% end %>

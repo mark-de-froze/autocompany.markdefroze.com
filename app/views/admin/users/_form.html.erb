@@ -1,0 +1,16 @@
+<h1><%= @title %></h1>
+<%= simple_form_for(@admin_user) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+
+  <%= f.input :email %>
+  <%= f.input :password, autocomplete: "off" %>
+  <%= f.input :password_confirmation %>
+
+  <div class="row">
+    <%= f.collection_check_boxes :role_ids, Role.all, :id, :to_label, :item_wrapper_class => 'col-2' %>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+<%= simple_form_for(resource,
+                    as: resource_name,
+                    url: registration_path(resource_name),
+                    html: { class: 'form-signin', method: :put }) do |f| %>
+  <%= f.error_notification %>
+  <h2 class="form-signin-heading">Edit User</h2>
+  <%= f.input :email, required: true, autofocus: true %>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+  <% end %>
+
+  <%= f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+  <%= f.input :password_confirmation, required: false %>
+  <%= f.input :current_password, hint: "we need your current password to confirm your changes", required: true %>
+
+  <%= f.button :submit, "Update", class: 'btn-lg btn-primary btn-block' %>
+
+  <h2 class="form-signin-heading">Cancel my account</h2>
+
+  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+  <%= link_to "Back", dashboard_path %>
+<% end %>
+

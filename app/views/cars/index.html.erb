@@ -1,0 +1,11 @@
+<h1><%=@title%></h1>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'New Car', new_car_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'cars/cars' %>

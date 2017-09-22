@@ -1,0 +1,12 @@
+en:
+  simple_form:
+    placeholders:
+      user:
+         email: "Email"
+         password: "Password"
+         password_confirmation: "Confirm password"
+         current_password: "Current password"
+    labels:
+      user:
+         remember_me: "Remember me"
+

@@ -1,0 +1,28 @@
+<h1><%= @title %></h1>
+<%= simple_form_for([@material.order, @material]) do |f| %>
+    <div class="my-3 mt-3">
+      <%= f.button :submit, class: 'btn btn-primary'%>
+      <%= yield :links %>
+    </div>
+    <%= f.error_notification %>
+
+    <%= f.input :title %>
+    <% if @material.storable_id %>
+        <div class="row">
+          <div class="col">
+            <%= f.input :price, input_html: {value: @material.autoload_price}%>
+          </div>
+          <% if @material.new_record? %>
+          <div class="col">
+            <%= f.input :quantity, input_html: { min: 1 }%>
+          </div>
+          <% end %>
+        </div>
+    <% end %>
+    <% if @material.new_record? %>
+      <%= f.input :storable_type, collection: @material.types, prompt: :translate %>
+      <% if @material.storable_type.present? && @material.types.include?(@material.storable_type.to_sym) %>
+        <%= f.input :storable_id, collection: @material.storable_all, prompt: :translate %>
+      <% end %>
+    <% end %>
+<% end %>

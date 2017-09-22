@@ -1,0 +1,29 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <% if current_user.has_role? :manager %>
+          <%= link_to 'Edit', edit_worker_path(@worker), class: 'btn btn-primary' %>
+        <% end %>
+        <%= link_to 'Back', workers_path, class: 'btn btn-light' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <%= render 'workers/worker', worker: @worker %>
+  <div class="col">
+    <p class="text-muted"><%=@tasks.size%> tasks assigned</p>
+    <p class="text-muted">In <%=@orders.size%> orders appointed responsible</p>
+  </div>
+</div>
+
+<% if @tasks.blank? %>
+<h2>Tasks</h2>
+<%= render 'tasks/tasks' %>
+<% end %>
+<% if @orders.blank? %>
+<h2>Orders</h2>
+<%= render 'orders/orders' %>
+<% end %>

@@ -1,0 +1,15 @@
+<h1><%= @title %></h1>
+<%= simple_form_for(@job) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col"><%= f.association :service, prompt: :translate %></div>
+    <div class="col-3"><%= f.input :price, input_html: {min: 0} %></div>
+  </div>
+  <%= f.input :title %>
+  <%= f.input :content %>
+<% end %>

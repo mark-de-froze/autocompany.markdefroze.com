@@ -1,0 +1,8 @@
+<% content_for :links do %>
+  <%= link_to 'Back', services_path, class: 'btn btn-light' %>
+  <%= link_to 'Show', @service, class: 'btn btn-light' %>
+  <%= link_to 'Destroy', @service, method: :delete, class: 'btn btn-danger', data: { confirm: t('confirm') } %>
+<% end %>
+
+<%= render 'form', service: @service %>
+

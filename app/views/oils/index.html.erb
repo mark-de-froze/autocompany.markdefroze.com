@@ -1,0 +1,68 @@
+<h1><%=@title%></h1>
+<% if current_user.has_role? :manager %>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'New Oil', new_oil_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Code</th>
+      <th>Quantity</th>
+      <th colspan="4" class="w-25"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @oils.each do |oil| %>
+      <tr>
+        <td><%= oil.title %></td>
+        <td><%= number_to_currency(oil.price) %></td>
+        <td><%= oil.code %></td>
+        <td>
+          <%= oil.quantity %>
+          <%= oil.unit_text %>
+          (in stock)
+        </td>
+        <% if current_user.has_role? :manager %>
+        <td><%= link_to 'Add', new_polymorphic_path([oil, History]) %></td>
+        <% end %>
+        <td align="right"><%= link_to 'Show', oil %></td>
+        <% if current_user.has_role? :manager %>
+        <td><%= link_to 'Edit', edit_oil_path(oil) %></td>
+        <td><%= link_to 'Destroy', oil, method: :delete, data: { confirm: t('confirm') } %></td>
+        <% end %>
+      </tr>
+      <% oil.histories.each do |history| %>
+      <tr class="<%= history.status == 'deleted' ? 'table-warning' : 'table-success' %>">
+        <td>
+          <span class="ml-3"><%= history.to_label%></span>
+        </td>
+        <td><%= number_to_currency(history.price)%></td>
+        <td><%= history.code%></td>
+        <td>
+          <%= history.quantity%>
+          <%= oil.unit_text %>
+        </td>
+        <td colspan="2" align="right"><%= link_to 'Show', [oil,history] %></td>
+        <% if current_user.has_role? :manager %>
+        <td><%= link_to 'Edit', edit_polymorphic_path([oil,history]) %></td>
+        <td><%= link_to 'Destroy', [oil,history], method: :delete, data: { confirm: t('confirm') } %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<% if @oils.empty? %>
+<h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>
+<%= paginate @oils %>

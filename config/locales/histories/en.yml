@@ -1,0 +1,8 @@
+en:
+  simple_form:
+    options:
+      history:
+        status:
+          added: "Added"
+          deleted: "Deleted"
+          edited: "Edited"

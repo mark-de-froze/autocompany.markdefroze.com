@@ -1,0 +1,8 @@
+<% content_for :links do %>
+  <%= link_to 'Back', admin_roles_path, class: 'btn btn-light' %>
+  <%= link_to 'Show', @admin_role, class: 'btn btn-light' %>
+  <%= link_to 'Destroy', @admin_role, method: :delete, class: 'btn btn-danger', data: { confirm: t('confirm') } %>
+<% end %>
+
+<%= render 'form', admin_role: @admin_role %>
+

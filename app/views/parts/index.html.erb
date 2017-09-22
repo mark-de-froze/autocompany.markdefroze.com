@@ -1,0 +1,67 @@
+<h1><%=@title%></h1>
+<% if current_user.has_role? :manager %>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'New Part', new_part_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Code</th>
+      <th>Quantity</th>
+      <th colspan="4" class="w-25"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @parts.each do |part| %>
+      <tr>
+        <td><%= part.title %></td>
+        <td><%= number_to_currency(part.price) %></td>
+        <td><%= part.code %></td>
+        <td>
+          <%= part.quantity %>
+          <%= part.unit_text %>
+        </td>
+        <% if current_user.has_role? :manager %>
+        <td><%= link_to 'Add', new_polymorphic_path([part, History]) %></td>
+        <% end %>
+        <td align="right"><%= link_to 'Show', part %></td>
+        <% if current_user.has_role? :manager %>
+        <td><%= link_to 'Edit', edit_part_path(part) %></td>
+        <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: t('confirm') } %></td>
+        <% end %>
+      </tr>
+      <% part.histories.each do |history| %>
+          <tr class="<%= history.status == 'deleted' ? 'table-warning' : 'table-success' %>">
+            <td>
+              <span class="ml-3"><%= history.to_label%></span>
+            </td>
+            <td><%= number_to_currency(history.price)%></td>
+            <td><%= history.code%></td>
+            <td>
+              <%= history.quantity%>
+              <%= part.unit_text %>
+            </td>
+            <td colspan="2" align="right"><%= link_to 'Show', [part,history] %></td>
+            <% if current_user.has_role? :manager %>
+            <td><%= link_to 'Edit', edit_polymorphic_path([part,history]) %></td>
+            <td><%= link_to 'Destroy', [part,history], method: :delete, data: { confirm: t('confirm') } %></td>
+            <% end %>
+          </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<% if @parts.empty? %>
+<h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>
+<%= paginate @parts %>

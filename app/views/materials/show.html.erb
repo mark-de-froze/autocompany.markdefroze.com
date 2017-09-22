@@ -1,0 +1,30 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'Edit', edit_order_material_path(@material.order, @material), class: 'btn btn-primary' %>
+        <%= link_to 'Back', order_materials_path(@material.order), class: 'btn btn-light' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p>
+  <b>Title:</b>
+  <%= @material.title %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= number_to_currency(@material.price) %>
+</p>
+
+<p>
+  <b>Storable:</b>
+  <%= @material.storable.to_label %>
+</p>
+
+<p>
+  <b>Storable type:</b>
+  <%= @material.storable_type %>
+</p>

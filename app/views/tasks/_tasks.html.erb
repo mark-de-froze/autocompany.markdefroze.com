@@ -1,0 +1,54 @@
+<% unless @worker || @order.status == 'closed'%>
+<div class="container mb-3 d-print-none">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'New Task', new_order_task_path(@order_id), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <% if @worker %>
+    <th>Order</th>
+    <% end %>
+    <th>Job</th>
+    <% unless @worker %>
+    <th>Worker</th>
+    <% end %>
+    <th>Price</th>
+    <th>Finished at</th>
+    <th colspan="3" class="w-25 d-print-none"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @tasks.each do |task| %>
+      <tr>
+        <% if @worker %>
+        <td><%= task.order.to_label if task.order %></td>
+        <% end %>
+        <td>
+          <%= task.job.to_label if task.job %>
+        </td>
+        <% unless @worker %>
+        <td><%= task.worker.to_label if task.worker %></td>
+        <% end %>
+        <td><%= number_to_currency(task.price) %></td>
+        <td><%= date(task.finished_at) %></td>
+        <td class="d-print-none"><%= link_to 'Show', [task.order, task] %></td>
+        <td class="d-print-none"><%= link_to 'Edit', edit_order_task_path(task.order, task) %></td>
+        <td class="d-print-none">
+          <%= link_to 'Destroy', [task.order, task], method: :delete, data: { confirm: t('confirm') } if @order.status == 'opened' %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<% if @tasks.empty? %>
+    <h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>
+<br>

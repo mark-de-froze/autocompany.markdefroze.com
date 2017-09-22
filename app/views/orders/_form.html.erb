@@ -1,0 +1,48 @@
+<% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+<% end %>
+
+<h1><%= @title %></h1>
+<%= simple_form_for(@order) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-2">
+      <%= f.input :status, collection: @order.statuses, prompt: :translate %>
+    </div>
+    <div class="col-3">
+      <%= f.association :worker, prompt: :translate %>
+    </div>
+    <% if @order.status == 'opened' %>
+      <div class="col">
+        <%= f.input :created_at, as: :date %>
+      </div>
+      <div class="col">
+        <%= f.input :finished_at, as: :date, default: Date.today() + 10 %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @order.status == 'opened' %>
+    <div class="row">
+      <div class="col">
+        <%= f.association :client, prompt: :translate %>
+      </div>
+      <% if @order.client %>
+      <div class="col">
+        <%= f.association :car, collection: @order.client.cars, prompt: :translate %>
+      </div>
+      <div class="col-2"><%= f.input :mileage, input_html: {min: 1} %></div>
+      <% end %>
+    </div>
+  <% end %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+
+<% end %>

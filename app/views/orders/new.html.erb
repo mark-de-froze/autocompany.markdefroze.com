@@ -1,0 +1,5 @@
+<% content_for :links do %>
+  <%= link_to 'Back', orders_path, class: 'btn btn-light' %>
+<% end %>
+
+<%= render 'form', order: @order %>

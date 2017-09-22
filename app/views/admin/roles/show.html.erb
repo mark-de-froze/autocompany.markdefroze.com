@@ -1,0 +1,22 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'Edit', edit_admin_role_path(@admin_role), class: 'btn btn-primary' %>
+        <%= link_to 'Back', admin_roles_path, class: 'btn btn-light' %>
+      </div>
+    </div>
+  </div>
+</div>
+<p>
+  <strong>Name:</strong>
+  <%= @admin_role.name %>
+</p>
+<p>
+  <strong>Resource:</strong>
+  <%= @admin_role.resource.to_label if @admin_role.resource %>
+</p>
+<p>
+  <strong>Resource type:</strong>
+  <%= @admin_role.resource_type if @admin_role.resource_type %>
+</p>

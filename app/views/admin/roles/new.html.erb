@@ -1,0 +1,5 @@
+<% content_for :links do %>
+  <%= link_to 'Back', admin_roles_path, class: 'btn btn-light' %>
+<% end %>
+
+<%= render 'form', admin_role: @admin_role %>

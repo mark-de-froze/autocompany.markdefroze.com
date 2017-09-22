@@ -1,0 +1,8 @@
+<% content_for :links do %>
+  <%= link_to 'Back', jobs_path, class: 'btn btn-light' %>
+  <%= link_to 'Show', @job, class: 'btn btn-light' %>
+  <%= link_to 'Destroy', @job, method: :delete, class: 'btn btn-danger', data: { confirm: t('confirm') } %>
+<% end %>
+
+<%= render 'form', job: @job %>
+

@@ -1,0 +1,40 @@
+<h1><%=@title%></h1>
+<h2>Orders</h2>
+<div class="row">
+  <% if current_user.has_role? :report %>
+  <div class="col">
+    <div class="card mb-3">
+      <ul class="list-group list-group-flush">
+        <% @orders.each do |order| %>
+            <li class="list-group-item">
+              <%= link_to("Report by order ##{order.id} from #{date(order.created_at)}", reports_order_url(order)) %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+    <%= paginate @orders %>
+  </div>
+  <% end %>
+
+  <div class="col">
+    <div class="card">
+      <ul class="list-group list-group-flush">
+        <% if current_user.has_role? :report %>
+        <li class="list-group-item">
+          <%= link_to('List of reports by orders by month', reports_orders_url) %>
+        </li>
+        <% end %>
+        <% @clients.each do |client| %>
+          <% if (current_user.has_role? :client, client) || (current_user.has_role? :report) %>
+            <li class="list-group-item">
+              <%= link_to('List of reports by orders for '+client.to_label, reports_orders_url(:client => client.id, :all => 1)) %>
+            </li>
+            <li class="list-group-item">
+              <%= link_to('List of reports by orders by month '+client.to_label, reports_orders_url(:client => client.id)) %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

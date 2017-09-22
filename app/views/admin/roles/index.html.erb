@@ -1,0 +1,31 @@
+<h1><%=@title%></h1>
+<div class="m-3 float-right">
+  <%= link_to 'New Admin Role', new_admin_role_path, class: 'btn btn-primary' %>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Resource</th>
+      <th colspan="3" class="w-25"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @admin_roles.each do |admin_role| %>
+      <tr>
+        <td><%= admin_role.name %></td>
+        <td><%= admin_role.resource.to_label if admin_role.resource %></td>
+        <td><%= link_to 'Show', admin_role %></td>
+        <td><%= link_to 'Edit', edit_admin_role_path(admin_role) %></td>
+        <td><%= link_to 'Destroy', admin_role, method: :delete, data: { confirm: t('confirm') } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @admin_roles.empty? %>
+<h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>
+<br>
+
+

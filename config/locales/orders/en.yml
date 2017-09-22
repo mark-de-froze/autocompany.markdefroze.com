@@ -1,0 +1,7 @@
+en:
+  simple_form:
+    options:
+      order:
+        status:
+          opened: "Opened"
+          closed: "Closed"

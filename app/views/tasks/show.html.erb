@@ -1,0 +1,39 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'Edit', edit_order_task_path(@task.order, @task), class: 'btn btn-primary' %>
+        <%= link_to 'Back', order_tasks_path(@task.order), class: 'btn btn-light' %>
+      </div>
+    </div>
+  </div>
+</div>
+<p>
+  <strong>Order:</strong>
+  <%= @task.order.to_label %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= @task.service.to_label %>
+</p>
+
+<p>
+  <strong>Job:</strong>
+  <%= @task.job.to_label %>
+</p>
+
+<p>
+  <strong>Worker:</strong>
+  <%= @task.worker.to_label %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency(@task.price) %>
+</p>
+
+<p>
+  <strong>Finished at:</strong>
+  <%= date(@task.finished_at) %>
+</p>

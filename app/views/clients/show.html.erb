@@ -1,0 +1,36 @@
+<% if current_user.has_role? :manager %>
+    <div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'Edit', edit_client_path(@client), class: 'btn btn-primary' %>
+        <%= link_to 'Back', clients_path, class: 'btn btn-light' %>
+        <%= link_to 'Destroy', @client, method: :delete, data: { confirm: t('confirm') }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<div class="container">
+  <h1 class="display-4"><%= @client.title %></h1>
+  <div class="row">
+    <div class="col-3">
+      <p>
+        <strong>User:</strong>
+        <%= @client.user.to_label %>
+      </p>
+      <p>
+        <strong>Users:</strong>
+        <% @client.users.each do |user| %>
+            <%=user.to_label%>
+        <% end %>
+      </p>
+    </div>
+    <div class="col">
+      <p class="lead"><%= @client.content %></p>
+    </div>
+  </div>
+</div>
+
+<%= render 'cars/cars' %>
+<%= render 'orders/orders' %>

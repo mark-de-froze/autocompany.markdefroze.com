@@ -1,0 +1,7 @@
+<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar d-print-none">
+  <ul class="nav nav-pills flex-column">
+    <% @menu.each do |url, item| nav_class = '/'+params[:controller] == url ? 'nav-link active':'nav-link' %>
+      <li class="nav-item"><%= link_to item, url, class: nav_class%></li>
+    <% end %>
+  </ul>
+</nav>

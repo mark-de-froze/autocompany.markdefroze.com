@@ -1,0 +1,79 @@
+<div class="container mb-3 d-print-none">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'Edit', edit_order_path(@order), class: 'btn btn-primary' %>
+        <%= link_to 'Back', orders_path, class: 'btn btn-light' %>
+        <%= link_to 'Report', reports_order_url(@order), class: 'btn btn-light' %>
+        <%= link_to 'Destroy', @order, method: :delete, data: { confirm: t('confirm') }, class: 'btn btn-danger' if @order.status == 'opened' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 class="text-center">
+  <% if @order.status == 'closed'%>
+    <span class="badge badge-primary"><%=@order.status_text%></span>
+  <% end %>
+  Order #<%=@order.id%> from <%=date(@order.created_at)%>
+  <% if @order.status == 'closed'%>
+    closed from <%=date(@order.finished_at)%>
+  <% end %>
+</h1>
+
+<div class="row">
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">Client:</dt>
+      <dd class="col-sm-7"><%=@order.client.to_label%></dd>
+
+      <dt class="col-sm-5">Phone:</dt>
+      <dd class="col-sm-7"><%=number_to_phone(@order.client.phone, area_code: true)%></dd>
+
+      <dt class="col-sm-5">Email:</dt>
+      <dd class="col-sm-7"><%=@order.client.user.email%></dd>
+    </dl>
+  </div>
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">Worker:</dt>
+      <dd class="col-sm-7"><%=@order.worker.to_label%></dd>
+
+      <dt class="col-sm-5">Email:</dt>
+      <dd class="col-sm-7"><%=@order.worker.user.email%></dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">Brand and model:</dt>
+      <dd class="col-sm-7"><%=@order.car.brand%> <%=@order.car.model%></dd>
+
+      <dt class="col-sm-5">Engine:</dt>
+      <dd class="col-sm-7"><%= @order.car.engine_number %> <%= @order.car.engine_type %> <%= @order.car.engine_capacity %></dd>
+
+      <dt class="col-sm-5">VIN:</dt>
+      <dd class="col-sm-7"><%=@order.car.vin%></dd>
+    </dl>
+  </div>
+
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">State number:</dt>
+      <dd class="col-sm-7"><%=@order.car.state_number%></dd>
+
+      <dt class="col-sm-5">Mileage:</dt>
+      <dd class="col-sm-7"><%=@order.mileage%> km</dd>
+
+      <dt class="col-sm-5">Year:</dt>
+      <dd class="col-sm-7"><%=@order.car.year%></dd>
+    </dl>
+  </div>
+</div>
+<hr>
+<%= render 'tasks/tasks' %>
+<%= render 'materials/materials' %>

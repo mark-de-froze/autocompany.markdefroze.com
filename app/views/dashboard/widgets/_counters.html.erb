@@ -1,0 +1,15 @@
+<div class="row mb-5">
+<% @counters.each do |c| %>
+  <div class="col-3">
+    <div class="card text-white bg-dark">
+      <div class="card-header">
+        <%=c['title']%> <% if c['label'] %><span class="badge badge-primary float-right"><%=c['label']%></span><% end %>
+      </div>
+      <div class="card-body text-center">
+        <p class="h1"><%=c['counter']%></p>
+        <p><%=c['text']%></p>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>

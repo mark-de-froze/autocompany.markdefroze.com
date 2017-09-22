@@ -1,0 +1,25 @@
+<h1><%=@title%></h1>
+<% if current_user.has_role? :manager %>
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'New Worker', new_worker_path, class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<div class="container">
+  <div class="row">
+    <% @workers.each do |worker| %>
+      <%= render 'workers/worker', worker: worker %>
+    <% end %>
+  </div>
+</div>
+
+<%= paginate @workers %>
+
+<% if @workers.empty? %>
+<h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>

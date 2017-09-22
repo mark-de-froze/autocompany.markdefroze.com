@@ -1,0 +1,141 @@
+<h1 class="text-center">Report by order #<%=@order.id%> from <%=date(@order.created_at)%></h1>
+
+<div class="row">
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">Client:</dt>
+      <dd class="col-sm-7"><%=@order.client.to_label%></dd>
+
+      <dt class="col-sm-5">Phone:</dt>
+      <dd class="col-sm-7"><%=number_to_phone(@order.client.phone, area_code: true)%></dd>
+
+      <dt class="col-sm-5">Email:</dt>
+      <dd class="col-sm-7"><%=@order.client.user.email%></dd>
+    </dl>
+  </div>
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">Worker:</dt>
+      <dd class="col-sm-7"><%=@order.worker.to_label%></dd>
+
+      <dt class="col-sm-5">Email:</dt>
+      <dd class="col-sm-7"><%=@order.worker.user.email%></dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">Brand and model:</dt>
+      <dd class="col-sm-7"><%=@order.car.brand%> <%=@order.car.model%></dd>
+
+      <dt class="col-sm-5">Engine:</dt>
+      <dd class="col-sm-7"><%= @order.car.engine_number %> <%= @order.car.engine_type %> <%= @order.car.engine_capacity %></dd>
+
+      <dt class="col-sm-5">VIN:</dt>
+      <dd class="col-sm-7"><%=@order.car.vin%></dd>
+    </dl>
+  </div>
+
+  <div class="col">
+    <dl class="row">
+      <dt class="col-sm-5">State number:</dt>
+      <dd class="col-sm-7"><%=@order.car.state_number%></dd>
+
+      <dt class="col-sm-5">Mileage:</dt>
+      <dd class="col-sm-7"><%=@order.mileage%> km</dd>
+
+      <dt class="col-sm-5">Year:</dt>
+      <dd class="col-sm-7"><%=@order.car.year%></dd>
+    </dl>
+  </div>
+</div>
+<hr>
+<% if @order.tasks.size > 0 %>
+<h3>List of completed tasks</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th width="1">#</th>
+      <th>Job</th>
+      <th width="10%">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% num = 0 %>
+  <% @order.tasks.each do |task|
+    num += 1
+    %>
+    <tr>
+      <td><%=num%></td>
+      <td><%=task.job.title%></td>
+      <td><%=number_to_currency(task.price)%></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="2">Amount:</th>
+      <th><%=number_to_currency(@order.calculate_amount_tasks)%></th>
+    </tr>
+  </tfoot>
+</table>
+<% end %>
+
+<% if @order.materials.size > 0 %>
+<h3>Used parts and materials</h3>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th width="1">#</th>
+    <th>Part or Oil</th>
+    <th width="10%">Price</th>
+    <th width="10%">Quantity</th>
+    <th width="10%">Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% num = 0 %>
+  <% @order.materials.each do |material|
+    num += 1
+    %>
+    <tr>
+      <td><%=num%></td>
+      <td><%=material.storable.title%> (<%= material.storable_type %>)</td>
+      <td><%=number_to_currency(material.price)%></td>
+      <td><%= material.quantity %> <%= material.storable.unit_text %></td>
+      <td><%=number_to_currency(material.calculate_total)%></td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot>
+  <tr>
+    <th colspan="4">Amount:</th>
+    <th><%=number_to_currency(@order.calculate_amount_materials)%></th>
+  </tr>
+  </tfoot>
+</table>
+<% end %>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th>Cost</th>
+    <th width="20%">Amount without tax</th>
+    <th width="20%">Tax</th>
+    <th width="20%">Amount with tax</th>
+  </tr>
+  </thead>
+  <tfoot>
+  <tr>
+    <th>Total, $</th>
+    <th><%=number_to_currency(@order.calculate_total)%></th>
+    <th><%=number_to_currency(@order.calculate_tax)%></th>
+    <th><%=number_to_currency(@order.calculate_total_with_tax)%></th>
+  </tr>
+  </tfoot>
+</table>
+
+<p class="h4"><em>Total for payment (in words): <small><%=@order.calculate_total_with_tax.humanize.to_s.humanize%></small></em></p>

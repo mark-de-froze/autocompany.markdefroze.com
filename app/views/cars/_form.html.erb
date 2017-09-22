@@ -1,0 +1,54 @@
+<h1><%= @title %></h1>
+<%= simple_form_for(@car) do |f| %>
+  <div class="my-3 mt-3">
+    <%= f.button :submit, class: 'btn btn-primary'%>
+    <%= yield :links %>
+  </div>
+  <%= f.error_notification %>
+  <%= f.association :client, prompt: :translate %>
+
+  <div class="row">
+    <div class="col">
+      <%= f.input :brand, input_html: { list: 'list_brands'} %>
+      <datalist id="list_brands">
+        <% @cars.group_by(&:brand).each do |item, car| %>
+            <option value="<%=item %>"><%=item %></option>
+        <% end %>
+      </datalist>
+    </div>
+    <div class="col">
+      <%= f.input :model, input_html: { list: 'list_models'} %>
+      <datalist id="list_models">
+        <% @cars.group_by(&:model).each do |item, car| %>
+            <option value="<%=item %>"><%=item %></option>
+        <% end %>
+      </datalist>
+    </div>
+    <div class="col"><%= f.input :state_number %></div>
+  </div>
+  <div class="row">
+    <div class="col"><%= f.input :vin %></div>
+    <div class="col">
+      <%= f.input :year, input_html: { min: 1990, list: 'list_years'} %>
+      <datalist id="list_years">
+        <% @car.years.each do |item| %>
+            <option value="<%=item %>"><%=item %></option>
+        <% end %>
+      </datalist>
+    </div>
+    <div class="col"><%= f.input :mileage, input_html: { min: 1 } %></div>
+  </div>
+  <div class="row">
+    <div class="col"><%= f.input :engine_number %></div>
+    <div class="col"><%= f.input :engine_type, collection: @car.engine_types, prompt: :translate %></div>
+    <div class="col"><%= f.input :engine_capacity, input_html: { min: 1, step: 0.1} %></div>
+  </div>
+  <%= f.input :title %>
+  <%= f.input :content %>
+
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col"></div>
+    </div>
+<% end %>

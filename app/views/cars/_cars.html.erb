@@ -1,0 +1,40 @@
+<div class="mb-3 card-deck row">
+  <% @cars.each do |car| %>
+    <div class="col-4">
+      <div class="card mb-5">
+        <div class="card-body">
+          <h4 class="card-title"><%=car.to_label%></h4>
+        </div>
+        <ul class="list-group list-group-flush">
+          <% unless @client %>
+          <li class="list-group-item">
+            <strong>Client:</strong>
+            <%=car.client.to_label%>
+          </li>
+          <% end %>
+          <li class="list-group-item">
+            <strong>Year:</strong>
+            <%=car.year%>
+          </li>
+          <li class="list-group-item">
+            <strong>Mileage:</strong>
+            <%=car.mileage%> km
+          </li>
+        </ul>
+
+        <div class="card-body">
+          <%= link_to 'Show', car, class: 'card-link' %>
+          <% if current_user.has_role? :manager %>
+            <%= link_to 'Edit', edit_car_path(car), class: 'card-link' %>
+            <%= link_to 'Destroy', car, method: :delete, data: { confirm: t('confirm') }, class: 'card-link' %>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= paginate @cars, param_name: :cars_page %>
+<% if @cars.empty? %>
+    <h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>

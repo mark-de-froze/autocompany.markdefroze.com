@@ -1,0 +1,23 @@
+<div class="col-4 mb-3">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"><%= worker.title %></h4>
+      <h6 class="card-subtitle mb-2 text-muted"><%= worker.user.to_label %></h6>
+      <p class="card-text"><%= worker.content %></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% worker.services.each do |service| %>
+        <li class="list-group-item"><%=service.to_label%></li>
+      <% end %>
+    </ul>
+    <% unless @worker %>
+    <div class="card-body">
+      <%= link_to 'Show', worker, class: 'card-link'%>
+      <% if current_user.has_role? :manager %>
+      <%= link_to 'Edit', edit_worker_path(worker), class: 'card-link' %>
+      <%= link_to 'Destroy', worker, method: :delete, data: { confirm: t('confirm') }, class: 'card-link' %>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container mb-3">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'Back', parts_path, class: 'btn btn-light' %>
+        <% if current_user.has_role? :manager %>
+        <%= link_to 'Edit', edit_part_path(@part), class: 'btn btn-primary' %>
+        <%= link_to 'Destroy', @part, method: :delete, data: { confirm: t('confirm') }, class: 'btn btn-danger' %>
+        <% end %>
+        </div>
+    </div>
+  </div>
+</div>
+<p>
+  <strong>Title:</strong>
+  <%= @part.title %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= number_to_currency @part.price %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @part.code %>
+</p>
+<p>
+  <strong>Quantity:</strong>
+  <%= @part.quantity %>
+</p>
+<p>
+  <strong>Unit:</strong>
+  <%= @part.unit_text %>
+</p>

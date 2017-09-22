@@ -1,0 +1,42 @@
+en:
+  simple_form:
+    "yes": 'Yes'
+    "no": 'No'
+    required:
+      text: 'required'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "Please review the problems below:"
+    labels:
+      defaults:
+    hints:
+      defaults:
+    include_blanks:
+      defaults:
+    placeholders:
+      defaults:
+        title: "Enter title"
+        content: "Enter content"
+        price: "Enter price in dollars ($)"
+        code: "Enter code"
+        quantity: "Enter quantity"
+        mileage: "Enter mileage"
+    prompts:
+      defaults:
+        user: "Please select user"
+        car: "Please select car"
+        client: "Please select client"
+        service: "Please select service"
+        unit: "Please select unit"
+    options:
+      defaults:
+        unit:
+          piece: "Piece"
+          box: "Box"
+          kit: "Kit"
+          liter: "Liter"
+          bottle: "Bottle"
+          canister: "Canister"

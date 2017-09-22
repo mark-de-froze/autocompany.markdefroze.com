@@ -1,0 +1,49 @@
+<% if @order.status == 'opened'%>
+<div class="container mb-3 d-print-none">
+  <div class="row">
+    <div class="col">
+      <div class="float-right">
+        <%= link_to 'New Material', new_order_material_path(@order_id), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Material</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Type</th>
+    <th colspan="3" class="w-25 d-print-none"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @materials.each do |material| %>
+      <tr>
+        <td>
+          <%= material.title if material.title %>
+          <%= material.storable.title if material.title.empty? %>
+        </td>
+        <td><%= number_to_currency(material.price) %></td>
+        <td>
+          <%= material.quantity %>
+          <%= material.storable.unit_text %>
+        </td>
+        <td><%= material.storable_type %></td>
+        <td class="d-print-none"><%= link_to 'Show', [material.order, material] %></td>
+        <td class="d-print-none"><%= link_to 'Edit', edit_order_material_path(material.order, material) %></td>
+        <td class="d-print-none">
+          <%= link_to 'Destroy', [material.order, material], :confirm => 'Are you sure?', :method => :delete if @order.status == 'opened' %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<% if @materials.empty? %>
+    <h2 class="text-center text-muted"><%=t('no_records_found')%></h2>
+<% end %>
+<br>
+
+
