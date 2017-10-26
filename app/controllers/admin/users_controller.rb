@@ -2,7 +2,6 @@ class Admin::UsersController < AuthenticateController
   load_and_authorize_resource param_method: :admin_user_params
 
   before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
-  before_action :except_password, only: [:update, :create]
 
   # GET /admin/users
   def index
@@ -52,10 +51,6 @@ class Admin::UsersController < AuthenticateController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin_user
       @admin_user = Admin::User.find(params[:id])
-    end
-
-    def except_password
-
     end
 
     # Only allow a trusted parameter "white list" through.

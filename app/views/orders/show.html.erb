@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col">
       <div class="float-right">
+        <%= link_to 'Print', 'javascript:window.print()', class: 'btn btn-warning' %>
         <%= link_to 'Edit', edit_order_path(@order), class: 'btn btn-primary' %>
         <%= link_to 'Back', orders_path, class: 'btn btn-light' %>
         <%= link_to 'Report', reports_order_url(@order), class: 'btn btn-light' %>

@@ -13,7 +13,8 @@ class Reports::OrdersController < AuthenticateController
 
     unless @start_date || (@client && params[:all])
       @title << ' by month'
-      first_year = @orders.order(:created_at).first.created_at.strftime('%Y').to_i
+      first_year = Date.today.year
+      first_year = @orders.order(:created_at).first.created_at.strftime('%Y').to_i if @orders
       end_year = Date.today.year
       @years = [first_year]
       @years = first_year..end_year if first_year < end_year

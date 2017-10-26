@@ -87,6 +87,7 @@ GEM
     erubi (1.6.1)
     execjs (2.7.0)
     ffi (1.9.18-x86-mingw32)
+    forgery (0.6.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     humanize (1.4.0)
@@ -223,6 +224,7 @@ DEPENDENCIES
   carrierwave (~> 1.0)
   coffee-rails (~> 4.2)
   devise
+  forgery (= 0.6.0)
   humanize
   jquery-rails
   kaminari
@@ -244,4 +246,4 @@ RUBY VERSION
    ruby 2.3.3p222
 
 BUNDLED WITH
-   1.15.3
+   1.16.0.pre.3

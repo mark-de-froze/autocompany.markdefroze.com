@@ -61,10 +61,15 @@ class Order < ApplicationRecord
   end
 
   def update_title
-    self.title = self.car.to_label if self.title.empty?
+    self.title = self.car.to_label if self.title.nil?
   end
 
   def update_mileage_car
-    self.car.mileage = self.mileage if self.car.mileage < self.mileage
+    if car.present?
+      if mileage
+        self.car.mileage ||= 0
+        self.car.mileage = self.mileage if self.car.mileage < self.mileage
+      end
+    end
   end
 end
