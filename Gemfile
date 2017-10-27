@@ -63,5 +63,3 @@ gem 'cancancan'
 gem 'rolify'
 gem 'nested_scaffold'
 gem 'humanize'
-
-gem 'forgery', '0.6.0'

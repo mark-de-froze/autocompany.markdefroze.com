@@ -1,24 +1,31 @@
-# README
+# autocompany.markdefroze.com
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple ERP system for middle business from area auto service.
 
-Things you may want to cover:
 
-* Ruby version
+The application is built on [Ruby on Rails](https://github.com/rails/rails), 
+[Bootstrap 3](http://getbootstrap.com/),
+welcome page create using [UIkit](https://github.com/uikit/uikit).
 
-* System dependencies
+## Ruby version
+ruby '2.3.3'
 
-* Configuration
+## Configuration
 
-* Database creation
+## Database creation
+```
+rake db:create
 
-* Database initialization
+rake db:migrate
+```
 
-* How to run the test suite
+## How to deploy this application? 
+Run application on localhost
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Clone this repo and run
+```
+rails s
+```
+Deploy application to Heroku
+For run this app on Heroku use [simple instruction](https://devcenter.heroku.com/articles/getting-started-with-rails5)
+### Voilà! If you find any errors, send mail to mail@markdefroze.com
