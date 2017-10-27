@@ -1,5 +1,6 @@
 class Worker < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   belongs_to :user
   has_and_belongs_to_many :services

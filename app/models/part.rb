@@ -1,5 +1,6 @@
 class Part < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   include Storable
 

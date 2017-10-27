@@ -1,5 +1,6 @@
 class Material < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   after_create :create_storable_history
   before_destroy { self.create_storable_history(:added)}

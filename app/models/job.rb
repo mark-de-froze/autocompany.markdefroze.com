@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   belongs_to :service
 

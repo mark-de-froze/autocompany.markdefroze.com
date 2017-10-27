@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   before_save :update_finished_at
   before_save :update_mileage_car

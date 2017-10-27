@@ -1,1 +1,209 @@
-<%=link_to('Sign in', new_user_session_path)%>
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+  <nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav">
+        <li class="uk-active"><a href="#"><%=t(:brand)%></a></li>
+        <li><a href="#about" uk-scroll>О нас</a></li>
+        <li><a href="#services" uk-scroll>Услуги</a></li>
+        <li><a href="#contact" uk-scroll>Контакты</a></li>
+      </ul>
+    </div>
+    <div class="uk-navbar-right">
+      <ul class="uk-navbar-nav">
+        <li><%=link_to('Вход на сайт', new_user_session_path)%></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<section id="intro" uk-height-viewport="offset-top: true" style="background-image: url(<%=image_path("hero#{rand(1..2)}.jpg")%>);" class="uk-text-center uk-light uk-background-cover uk-background-top-right uk-flex uk-flex-middle uk-flex-center">
+  <div>
+    <h1 class="uk-heading-hero uk-text-uppercase">Услуги премиального автосервиса</h1>
+    <h2 class="uk-heading-primary uk-text-uppercase">Бизнес клиента на первом месте</h2>
+  </div>
+</section>
+<section id="about" uk-height-viewport class="uk-text-center uk-flex uk-flex-middle uk-flex-center">
+  <div class="uk-container-small uk-margin-large-top">
+    <h3 class="uk-heading-primary uk-text-uppercase">Сервис в любом месте</h3>
+    <p class="uk-text-lead uk-margin-large">
+      Вы везете пассажиров в незабываемое путешествие? Предоставляете первоклассные услуги по дальним перевозкам?
+      В тесном сотрудничестве с вами мы поможем организовать автобусные перевозки, которые будут полностью
+      приспособлены к конкретным потребностям и обеспечат высокий уровень комфорта как водителям,
+      так и пассажирам, в любой точке мира.
+    </p>
+
+    <div class="uk-child-width-1-2" uk-grid uk-scrollspy="target: > div > img; cls: uk-animation-kenburns; repeat: true">
+      <div class="uk-padding-remove uk-margin-remove uk-overflow-hidden">
+        <%=image_tag('tile1.png')%>
+      </div>
+      <div class="uk-padding-remove uk-margin-remove uk-overflow-hidden">
+        <%=image_tag('tile2.png')%>
+      </div>
+      <div class="uk-padding-remove uk-margin-remove uk-overflow-hidden">
+        <%=image_tag('tile3.jpg')%>
+      </div>
+      <div class="uk-flex-middle uk-flex-center uk-height-1-1 uk-padding">
+        <div class="uk-h2">Услуги СТО</div>
+        <p class="uk-h4">
+          Мы в знаем, чего стоят механические неисправности и простои.
+          Наши гибкие решения помогут вам увеличить время безотказной работы и достичь поставленных целей.
+          Наши услуги СТО призваны помочь вам не сходить с пути и обеспечивают экспертное обслуживание 24 часа в сутки.
+        </p>
+      </div>
+      <div class="uk-flex-middle uk-flex-center uk-height-1-1 uk-padding">
+        <div class="uk-h2">Автопаркинг</div>
+        <p class="uk-h4">
+          Ваш премиальний автопарк всегда в надежности и сохранности 24 часа в сутки на нашей территории паркинга.
+          Для Вас работают профессионалы своего дела и всегда готовы помочь. На территории паркинга работает автозаправка,
+          автомойка, хостел для водителей.
+        </p>
+      </div>
+      <div class="uk-padding-remove uk-margin-remove uk-overflow-hidden">
+        <%=image_tag('tile4.jpg')%>
+      </div>
+      <div class="uk-padding-remove uk-margin-remove uk-overflow-hidden">
+        <%=image_tag('tile5.jpg')%>
+      </div>
+      <div class="uk-flex-middle uk-flex-center uk-height-1-1 uk-padding">
+        <div class="uk-h2">Автомагазин</div>
+        <p class="uk-h4">
+          Запасные части положительно сказываются на прибыльности вашего бизнеса — они способствуют увеличению
+          времени безотказной работы и уменьшению эксплуатационных расходов.
+          Используйте только оригинальные запасные части,
+          которые обеспечат Вашему автомобилю безотказную и долгосрочную работу.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section uk-height-viewport class="uk-text-center uk-flex uk-flex-middle uk-flex-center">
+  <div class="uk-container-small uk-margin-large-top">
+    <h3 class="uk-heading-primary uk-text-uppercase">Гарантия безотказной работы в кратчайшие сроки</h3>
+    <p>
+      Посетив наш автоцентр, Вы поймете, в чем заключается уникальность технических специалистов.
+      Они решат любую проблему, с которой Вы обратитесь и предложат варианты по улучшению характеристик Вашего
+      автомобиля, о которых Вы не задумывались или считали невозможными.
+    </p>
+    <div class="uk-child-width-1-4 uk-grid-match" uk-grid>
+      <div>
+        <div class="uk-card uk-background-muted uk-card-body">
+          <div class="uk-h2"><%=@orders%></div>
+          <p class="uk-h3">Заказов</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-background-muted uk-card-body">
+          <div class="uk-h2"><%=@clients%></div>
+          <p class="uk-h3">Клиентов</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-background-muted uk-card-body">
+          <div class="uk-h2"><%=@cars%></div>
+          <p class="uk-h3">Автомобилей</p>
+        </div>
+      </div>
+      <div>
+        <div class="uk-card uk-background-muted uk-card-body">
+          <div class="uk-h2"><%=@workers%></div>
+          <p class="uk-h3">Техников</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="services" uk-height-viewport class="uk-text-center">
+  <div class="uk-container uk-container-large uk-margin-large-top">
+    <div class="uk-grid-match" uk-grid uk-scrollspy="target: > div > .uk-inline-clip; cls:uk-animation-fade; delay: 500">
+      <div class="uk-width-2-3 uk-height-small">
+        <div class="uk-text-center">
+          <div class="uk-inline-clip uk-transition-toggle uk-light">
+            <%=image_tag('service3.jpg')%>
+            <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+              <p class="uk-h2 uk-margin-remove uk-text-uppercase">Городские и междугородние автобусы</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-1-3">
+        <div class="uk-inline-clip uk-transition-toggle uk-light">
+          <%=image_tag('service1.png')%>
+          <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+            <p class="uk-h2 uk-margin-remove uk-text-uppercase">Прицепы</p>
+          </div>
+        </div>
+        <div class="uk-inline-clip uk-transition-toggle uk-margin-top uk-light">
+          <%=image_tag('service2.jpg')%>
+          <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+            <p class="uk-h2 uk-margin-remove uk-text-uppercase">Спецтехника</p>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-1-3">
+        <div class="uk-inline-clip uk-transition-toggle uk-light">
+          <%=image_tag('service5.jpg', class: 'uk-height-1-1')%>
+          <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+            <p class="uk-h2 uk-margin-remove uk-text-uppercase">Двигатели</p>
+          </div>
+        </div>
+      </div>
+      <div class="uk-width-2-3">
+        <div class="uk-text-center">
+          <div class="uk-inline-clip uk-transition-toggle uk-light">
+            <%=image_tag('service4.jpg')%>
+            <div class="uk-position-cover uk-flex uk-flex-center uk-flex-middle">
+              <p class="uk-h2 uk-margin-remove uk-text-uppercase">Грузовые автомобили</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section uk-height-viewport class="uk-text-center uk-flex uk-flex-middle uk-flex-center">
+  <div class="uk-container uk-container-large uk-margin-large-top">
+    <div class="" uk-grid>
+      <div class="uk-width-1-3">
+        <table class="uk-table uk-table-striped" uk-scrollspy="cls: uk-animation-slide-left; repeat: true">
+          <% @services.limit(10).each do |service|%>
+              <tr>
+                <td><%=service.title%></td>
+              </tr>
+          <% end %>
+        </table>
+      </div>
+      <div class="uk-width-1-3">
+        <h4 class="uk-heading-primary uk-text-uppercase">Сервисный решения</h4>
+        <p class="uk-text-lead uk-h3 uk-margin-large-top">
+          Поможем вам достичь максимальной производительности благодаря широкому ряду услуг,
+          специально приспособленных к вашей сфере деятельности.
+        </p>
+      </div>
+      <div class="uk-width-1-3" uk-scrollspy="cls: uk-animation-slide-right; repeat: true">
+        <table class="uk-table uk-table-striped">
+          <% @services.limit(10).offset(10).each do |service|%>
+          <tr>
+            <td><%=service.title%></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="contact" class="uk-margin-large-top">
+  <div class="uk-inline uk-margin uk-width-1-1">
+    <div class="uk-position-small uk-position-center">
+      <div class="uk-text-center uk-card uk-card-default uk-card-body uk-height-medium uk-width-1-1">
+        <div class="uk-h1 uk-margin-remove">Давайте поговорим о деле</div>
+        <div class="uk-h3 uk-margin-small-top">Телефон автоцентра</div>
+        <div class="uk-h4 uk-margin-small-top">У вас есть вопросы? Мы всегда готовы помочь.</div>
+        <div class="uk-button uk-button-primary uk-button-large uk-light"><span class="uk-h3">+7 978 812 8212</span></div>
+      </div>
+    </div>
+    <div>
+      <iframe uk-responsive src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31279.84700267729!2d34.13478365666257!3d44.49900869810348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4094c9077c8d204b%3A0x7c5f808a64d487ae!2z0K_Qu9GC0LAgOTg2MDA!5e0!3m2!1sru!2sua!4v1509044414142" width="100%" frameborder="0" style="border: 0px;" class="uk-height-viewport" allowfullscreen=""></iframe>
+    </div>
+  </div>
+</section>

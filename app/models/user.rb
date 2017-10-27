@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   rolify
 

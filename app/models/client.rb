@@ -1,5 +1,6 @@
 class Client < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   belongs_to :user
   has_many :cars

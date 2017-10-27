@@ -1,5 +1,6 @@
 class History < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   include ApplicationHelper
   belongs_to :trackable, polymorphic: true

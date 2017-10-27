@@ -1,5 +1,6 @@
 class Task < ApplicationRecord
   resourcify
+  include OrderUpdatedAt
 
   belongs_to :order
   belongs_to :service

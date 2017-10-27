@@ -2,6 +2,7 @@ class Oil < ApplicationRecord
   include Storable
 
   resourcify
+  include OrderUpdatedAt
 
   validates :title, :unit, :quantity, :total, presence: true
   validates :price, numericality: { only_integer: true }
